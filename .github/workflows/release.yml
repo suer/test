@@ -9,9 +9,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
     - name: Create release
-      run: gh release create ${{ github.ref_name }} --generate-notes
+      run: gh release create ${{ github.ref_name }} --generate-notes --repo ${{ github.repository }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
