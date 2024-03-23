@@ -1,0 +1,22 @@
+name: set path test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: make shell script
+        run: |
+          mkdir -p ${{ github.workspace }}/bin
+          echo "#!/bin/sh" >> ${{ github.workspace }}/bin/foo.sh
+          echo "echo hello" >> ${{ github.workspace }}/bin/foo.sh
+          chmod +x ${{ github.workspace }}/bin/foo.sh
+      - name:  set path
+        run: |
+          echo ${{ github.workspace }}/bin >> $GITHUB_PATH
+      - name: run shell script
+        run: |
+          foo.sh
+
